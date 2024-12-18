@@ -1,0 +1,211 @@
+Formato básico: 
+
+Select campo/s
+Frrom tabla/s
+
+ejemplo: 
+Alumno=(dni,nombre,apellido)
+
+select nombre
+from Alumno
+
+Si quisiéramos seleccionar todos los campos de una tabla, podríamos usar el * para ahorrarnos de escribir campo por campo.
+
+
+OPERACION DISTINCT: 
+
+Si queremos eliminar tuplas repetidas, deberíamos usar un select. 
+El DISTINCT se aplica a campos del select y elimina tuplas repetidas. 
+
+Ejemplos: 
+Alumno=(dni,nombre,apellido)
+
+Select DISTINCT(nombre)
+from Alumno
+
+Resultado: Esta consulta devolverá todos los nombres de la tabla alumnos, si encuentra nombres repetidos, no los muestra repetidos, sino que lo muestra una unica vez.  
+
+OPERACION WHERE: 
+Va luego del from y se usa para filtrar filas que cumplan con una determinada condición. 
+
+formato básico: 
+
+Select campo/s
+from tabla/s
+where condición/es
+
+Ejemplo: 
+
+select *
+from Alumno
+where (nombre = "Luciana")
+
+EN UN WHERE PODEMOS TENER VARIAS CONDICIONES, ES DECIR PODEMOS HACER AND, OR,= , < , > , <=, >= , <> , BETWEEN (ENTRE. INCLUYE EXTREMOS), LIKE 
+
+LIKE: TRABAJA CON STRING. TIENE GRAN POTENCIA. 
+SE PUEDE COMBINAR CON: 
+%: representa cualquier cadena de caracteres, inclusive la cadena vacia
+select nombre,apellido
+from Alumno
+where (apellido LIKE '&ez')
+
+
+_: sustituye solo el carácter del lugar donde aparece. 
+Es decir, si tengo que saber aquellas personas que terminan en ciana y que tengan DOS caracteres antes, tengo que usar esto. aplicando doble guion bajo ( nombre LIKE '__ciana' )
+select nombre,apellido
+from alumno
+where (nombre LIKE '__ciana')
+
+OPERACIONES ARITMETICAS EN EL SELECT: 
+Los atributos utilizados en el SELECT de una consulta SQL pueden tener asociados operaciones validas para sus dominios.
+
+Select apellido,dni -20000000
+from alumno
+
+Resultado: Esta consulta muestra apellido y le resta 20 millones a aquellos dni de la tabla alumno
+
+IS NULL: verifica si un atributo tiene el valor de NULL 
+IS NOT NULL: verifica si un atributo tiene un valor, es decir es distinto de NULL 
+
+select nombre,apellido
+from alumno
+where (nombre IS NOT NULL)
+
+PRODUCTO CARTESIANO: ( , ): lo mismo que en algebra relacional. La sintaxis es poner en el from dos tablas separadas por una coma (',')
+Select * 
+from alumno,materia
+
+
+RENOMBRE DE ATRIBUTOS / ALIAS PARA UNA TABLA: 
+La operación as: Se usa en el SELECT, sirve para renombrar atributos: 
+
+Select a.nombre as "Nombre alumno", m.nombre as "Nombre materia" 
+from alumno a,materia m
+
+Alias definido para una tabla: se escribe el nombre de la tabla y después el alias. Entonces en el select podemos referenciarnos a la tabla poniendo el alias que le damos en el from. 
+
+DATO: EL ORDEN DE EJECUCION DE LA CONSULTA NO ES EL ORDEN SECUENCIAL EN EL CUAL SE ESCRIBEN LAS CONSULTAS. 
+
+INNER JOIN: ES PRODUCTO NATURAL (INNER JOIN EN SQL) PERO LA DIFERENCIA ES QUE SE DEBE ESPECIFICAR LA CONDICION 
+PARA MATCHEAR EN LA SENTENCIA ON. 
+A IGUAL VALOR DE CAMPO, IGUAL VALOR PARA QUE SE RETORNE LA TUPLA. 
+REUNE LAS TUPLAS DE LAS RELACIONES QUE TIENEN SENTIDO. 
+- SE REALIZA EN LA CLAUSULA FROM INDICANDO LAS TABLAS INVOLUCRADAS Y LUEGO DE LA SENTENCIA ON LA CONDICION QUE DEBE CUMPLIRSE.
+- PONGO EXPLICITAMENTE LOS CAMPOS DE LA TABLA INVOLUCRADA PARA QUE ME DEVUELVA LA TUPLA.
+--EN ESTA OPERACION, EN EL INNER JOIN, DEBEMOS ESPECIFICARLE EL CAMPO POR EL CUAL QUEREMOS QUE MATCHEEN: 
+*** PARA USAR INNER JOIN, DEBEMOS ESPECIFICAR LA CONDICION POR LA CUAL SE DEBE MATCHEAR Y ADEMAS PONER EL 'ON' 
+EL ON ACUARIA COMO LA CONDICION QUE SE DEBE CUMPLIR.***
+
+ejemplo: 
+select a.nombre, a.apellido, e.nota
+from alumno a INNER JOIN examen e ON (a.dni = e.dni)
+
+SI UTILIZO NATURAL JOIN VA A MOSTRAR TUPLAS CUYO CAMPO QUE SE LLAMAN IGUAL TENGAN EL MISMO VALOR. ES DECIR, EL NATURAL JOIN ES TAL CUAL EL PRODUCTO NATURAL DE ALGEBRA RELACIONAL.
+- EL NATURAL JOIN ES LO MISMO QUE EL PRODUCTO NATURAL. DEVUELVE AQUELLAS TUPLAS QUE COINCIDEN EN NOMBRE Y VALOR. 
+
+CUANDO USAR INNER JOIN Y CUANDO NATURAL JOIN? 
+GENERALMENTE ES MAS SEGURO HACER UN INNER JOIN. PERO DEPENDIENDO EL CASO PODRIAMOS APLICAR UNA O LA OTRA.
+SI HAY DOS TABLAS QUE TIENEN EN COMUN SOLO UN ATRIBUTO, Y ESE ATRIBUTO TIENE EL MISMO NOMBRE EN AMBAS TABLAS, PODRIAMOS HACER UN NATURAL JOIN 
+PERO SI ESE ATRIBUTO, REPRESENTA LO MISMO Y TIENEN DISTINTO NOMBRE, DEBERIAMOS USAR UN INNER JOIN Y ESPECIFICAR EN EL ON EL CAMPO POR EL CUAL QUERAMOS QUE MATCHEE. 
+
+EN SQL TAMBIEN TENEMOS OPERACIONES DE UNION, INTERSECCION, Y DIFERENCIA (EXCEPT) PARA PODER USARLAS TENEMOS QUE TRABAJAR CON TABLAS COMPATIBLES
+
+INTERSECT CLAUSULA PARA LA OPERACION DE INTERSECCION
+UNION CLAUSULA PARA LA OPERACION DE UNION
+
+DIFERENCIA EN SQL: 
+EXCEPT CLAUSULA PARA LA OPERACION DE DIFERENCIA
+
+Enunciado: Mostrar aqiellos dni de alumnos con dni > 25000000 que no hayan rendido un examen
+
+select dni
+from alumno
+where (dni > 25000000)
+except
+ ( select dni 
+from examen ) 
+ 
+
+ORDER BY: PERMITE ORDENAR LAS TUPLAS RESULTANTES POR EL ATRIBUTO QUE SE LE INDIQUE. POR DEFECTO ORDENA DE MENOR A MAYOR. (ORDEN ASC)
+
+EJEMPLO: 
+
+SELECT NOMBRE,APELLIDO,DNI
+FROM ALUMNO
+WHERE DNI > 25000000 AND NOMBRE="LUCIANA"
+ORDER BY APELLIDO,DNI,DESC 
+
+FUNCIONES DE AGREGACION: 
+SE UTILIZAN EN EL SELECT. 
+
+CLAUSULA GROUP BY: AGRUPA LAS TUPLAS POR ALGUN CRITERIO CON EL OBJETIVO DE APLICAR ALGUNA FUNCION DE AGREGACION.
+EN EL GROUP BY, SIEMPRE DEBEMOS AGRUPAR POR LOS CAMPOS DEL SELECT, PERO TAMBIEN PODRIAMOS AGRUPAR POR UNA FK. COMO EN EL EJEMPLO SIGUIENTE ES EL DNI
+
+EJEMPLO:
+
+SELECT NOMBRE,APELLIDO ABG(NOTA) AS PROMEDIO
+FROM ALUMNO A INNER JOIN EXAMEN E ON 
+A.DNI = E.DNI
+GROUP BY E.DNI,NOMBRE,APELLIDO
+
+CLAUSULA HAVING: SE UTILIZA PARA FILTRAR GRUPOS QUE CUMPLAN UNA DETERMINADA CONDICION. SIEMPRE QUE USO UN HAVING, VOY A TENER UN GROUP BY. ES DECIR EL HAVING, SOLO FILTRA GRUPOS.
+
+OJO: NO CONFUNDIR WHERE CON HAVING. 
+EL WHERE SE APLICA A NIVEL TUPLA/REGISTRO
+EL HAVING SE APLICA A NIVEL DE GRUPOS
+
+EJEMPLO: 
+select nombre,apellido,AVG(nota) as promedio
+from alumno a INNER JOIN examen e ON a.dni = e.dni 
+group by e.dni,nombre,apellido
+having promedio>5
+
+esta consulta lo que hace es, muestra nombre,apellido,promedio de aquellos alumnos que rindieron exámenes y su nota promedio sea mayor a 5. 
+
+
+SUBCONSULTAS: 
+CONSISTE EN UBICAR UNA CONSULTA SQL DENTRO DE OTRA. 
+ALGUNAS OPERACIONES DE COMPARACION SON: 
+= (IGUALDAD) : CUANDO UNA SUBCONSULTA RETORNA UN UNICO RESULTADO ES POSIBLE COMPARARLO CONTRA UN VALOR SIMPLE.
+IN (PERTENENCIA): COMPRUEBA SI UN ELEMENTO ES PARTE O NO DE UN CONJUNTO. (NOT IN)
+=SOME: IGUAL A ALGUNO
+>ALL: MAYOR QUE TODOS
+<=SOME: MENOR O IGUAL QUE ALGUNO
+
+
+AL MOMENTO DE COMPARAR SUBCONSULTAS TENEMOS QUE TENER CUIDADO, DEBEMOS COMPARAR DOS CAMPOS QUE TENGAN SENTIDO, ES DECIR, PODEMOS COMPARAR DNI CON DNI, PERO NO TIENE SENTIDO COMPARAR DNI CON NOMBRE O APELLIDO.
+
+EJEMPLO DE SUBCONSULTA: 
+
+SELECT NOMBRE,APELLIDO
+FROM ALUMNO
+WHERE DNI IN (SELECT DNI FROM EXAMEN WHERE NOTA=10)
+
+esta consulta anterior, lo que hace es mostrar el nombre, apellido de aquellos alumnos que coincidan el dni con la subconsulta que devuelve aquellos dni que rindieron examen y tuvieron como nota 10
+
+CLAUSULA EXISTS
+PERMITE COMPROBAR SI UNA SUBCONSULTA GENERÓ O NO ALGUNA TUPLA COMO RESPUESTA. EL RESULTADO DE LA CLAUSULA EXIST ES VERDADERO SI LA SUBCONSULTA TIENE AL MENOS UNA TUPLA Y FALSO EN CASO CONTRARIO
+
+LA NEGACION SERIA NOT EXIST
+
+EJEMPLO CON EXISTS
+select nombre,apellido
+from alumno a 
+where exists (select * from examen e where a.dni=e.dni and e.nota<=4)
+
+la consulta anterior muestra el nombre y apellido SI EXISTE de aquellos alumnos que rindieron examen y sacaron nota<=4
+
+ALTA BAJA Y MODIFICACION: 
+
+INSERT INTO: AGREGA TUPLAS A UNA TABLA
+
+INSERT INTO <NOMBRETABLA> (<CAMPOSTABLA>) VALUES <VALORES SEPARADOS POR ,>
+
+DELETE FROM: BORRA UNA TUPLA O UN CONJUNTO DE TUPLAS DE UNA TABLA
+
+DELETE FROM ALUMNO WHERE DNI=28765431
+
+UPDATE <TABLA> SET: MODIFICA EL CONTENIDO DE UNO O VARIOS ATRIBUTOS DE UNA TABLA
+
+UPDATE ALUMNO SET NOMBRE="LUCIANA" WHERE DNI=43300655
+ 
