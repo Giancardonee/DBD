@@ -24,3 +24,6 @@
 - ## Que significa que ambas tablas sean compatibles?
 - Misma cantidad de atributos: Ambas relaciones deben tener el mismo número de columnas.
 - Mismo dominio para cada atributo correspondiente: Las columnas en las mismas posiciones deben tener el mismo tipo de datos (por ejemplo, si la primera columna en una tabla es de tipo entero, la primera columna en la otra también debe ser de tipo entero).
+## TIPS PARA SQL 
+![image](https://github.com/user-attachments/assets/567c672b-cf72-4e0e-b0b7-b37133bd72a4)
+
