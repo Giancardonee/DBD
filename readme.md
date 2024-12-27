@@ -1,7 +1,7 @@
 # Tips que tenia anotados 
 (( Les diria que consulten los tips, generalmente la mayoria me los fueron diciendo los ayudantes, pero capaz los anote de una manera que se puedan tener distintas interpretaciones ))
 ## Conceptual: 
-- Siempre que tengo 1,1 los atributos que pensamos que van en la relación , van del lado que tiene 1,1
+- Siempre que tengo 1,1 los atributos que pensamos que van en la relación , van en la entidad del lado que tiene 1,1
 - Voy a tener atributos en la relación cuando tenemos relacion n a n 
 - Si tenemos dos relaciones con cardinalidad 1,1 de ambos lados probablemente este mal planteado (hay excepciones que este bien)
 - Solamente si tenemos cardinalidad 1,1 podemos recibir un id externo de otra entidad que esté relacionada
