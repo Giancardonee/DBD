@@ -25,6 +25,6 @@
 - Misma cantidad de atributos: Ambas relaciones deben tener el mismo número de columnas.
 - Mismo dominio para cada atributo correspondiente: Las columnas en las mismas posiciones deben tener el mismo tipo de datos (por ejemplo, si la primera columna en una tabla es de tipo entero, la primera columna en la otra también debe ser de tipo entero).
 
-## Parciales 2024: 
+## Parciales Practicos 2024: 
 [Enunciados Primera y Segunda Fecha](https://github.com/Giancardonee/DBD/blob/main/Parciales%20y%20Resoluciones/PDFs%20REJUNTE%20DE%20PARCIALES/DBD%20-%20Parciales%202024.pdf)  
-[Parcial Tercer fecha y resolucion conceptual aprobada](https://github.com/Giancardonee/DBD/blob/main/Parciales%20y%20Resoluciones/PDFs%20REJUNTE%20DE%20PARCIALES/Parcial%20tercer%20fecha%20y%20resolucion%20de%20conceptual.pdf)
+[Tercer fecha y resolucion conceptual aprobada](https://github.com/Giancardonee/DBD/blob/main/Parciales%20y%20Resoluciones/PDFs%20REJUNTE%20DE%20PARCIALES/Parcial%20tercer%20fecha%20y%20resolucion%20de%20conceptual.pdf)
